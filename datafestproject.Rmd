@@ -48,5 +48,11 @@ US_cases<-global_cases %>%
   filter(Entity=="United States")
 global_cases<-global_cases %>% 
   filter(Entity=="World")
+entertainment_stocks<-entertainment_stocks %>% 
+  mutate(Date = as.Date(Date, format="%m/%d/%y"))
+global_cases<-global_cases %>% 
+  mutate(Date = as.Date(Date, format = "%B %d, %Y"))
+US_cases<-US_cases %>% 
+  mutate(Date = as.Date(Date, format = "%B %d, %Y"))
 ```
 
