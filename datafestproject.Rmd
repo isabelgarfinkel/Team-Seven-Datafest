@@ -32,3 +32,17 @@ Roku_6M <- read_csv("data/Roku 6M.csv")
 global_cases <- read_csv("data/time_series_covid19_confirmed_global.csv")
 ```
 
+```{r}
+entertainment_stocks<-Amazon_6M %>% 
+  select(Date,Amazon_Close=`Close/Last`) %>% 
+  mutate(AMC_Close = AMC_6M$`Close/Last`,
+         Apple_Close = Apple_6M$`Close/Last`,
+         ATT_Close = ATT_HBO_6M$`Close/Last`,
+         Cinemark_Close = Cinemark_6M$`Close/Last`,
+         Dish_Close = Dish_6M$`Close/Last`,
+         Disney_Close = Disney_6M$`Close/Last`,
+         Google_Close = Google_Class_A_6M$`Close/Last`,
+         Netflix_Close = Netflix_6M$`Close/Last`,
+         Roku_Close = Roku_6M$`Close/Last`)
+```
+
