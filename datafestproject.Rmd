@@ -49,7 +49,7 @@ US_cases<-global_cases %>%
 global_cases<-global_cases %>% 
   filter(Entity=="World")
 entertainment_stocks<-entertainment_stocks %>% 
-  mutate(Date = as.Date(Date, format="%m/%d/%y"))
+  mutate(Date = as.Date(Date, format="%m/%d/%Y"))
 global_cases<-global_cases %>% 
   mutate(Date = as.Date(Date, format = "%B %d, %Y")) %>% 
   select(Date, Global_Cases = `Total confirmed cases of COVID-19 (cases)`)
@@ -59,5 +59,32 @@ US_cases<-US_cases %>%
 temp<-left_join(global_cases, US_cases, by = "Date")
 stocks_cases<-full_join(entertainment_stocks, temp, by = "Date") %>% 
   arrange(Date)
+stocks_cases$Amazon_Close<-as.numeric(gsub('[$]', '', stocks_cases$Amazon_Close))
+stocks_cases$AMC_Close<-as.numeric(gsub('[$]', '', stocks_cases$AMC_Close))
+stocks_cases$Apple_Close<-as.numeric(gsub('[$]', '', stocks_cases$Apple_Close))
+stocks_cases$ATT_Close<-as.numeric(gsub('[$]', '', stocks_cases$ATT_Close))
+stocks_cases$Cinemark_Close<-as.numeric(gsub('[$]', '', stocks_cases$Cinemark_Close))
+stocks_cases$Dish_Close<-as.numeric(gsub('[$]', '', stocks_cases$Dish_Close))
+stocks_cases$Disney_Close<-as.numeric(gsub('[$]', '', stocks_cases$Disney_Close))
+stocks_cases$Google_Close<-as.numeric(gsub('[$]', '', stocks_cases$Google_Close))
+stocks_cases$Netflix_Close<-as.numeric(gsub('[$]', '', stocks_cases$Netflix_Close))
+stocks_cases$Roku_Close<-as.numeric(gsub('[$]', '', stocks_cases$Roku_Close))
+```
+
+# Visualizations
+
+```{r}
+# stocks_cases %>% 
+#   filter(!is.na(Apple_Close)) %>% 
+#   ggplot(aes(x=Date))+
+#   geom_point(aes(y=Apple_Close),color="red")+
+#   geom_point(aes(y=ATT_Close), color="blue")
+par(mar=c(5, 4, 4, 6) + 0.1, pch = 16)
+plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=FALSE, frame.plot=TRUE, xlab="", ylab="")
+par(new=TRUE)
+plot(x = stocks_cases$Date, y = stocks_cases$Apple_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="")
+par(new=TRUE)
+plot(x = stocks_cases$Date, y = stocks_cases$ATT_Close, type = "p", col = "blue",axes=FALSE, frame.plot=TRUE, xlab="", ylab="")
+
 ```
 
