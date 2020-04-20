@@ -51,8 +51,13 @@ global_cases<-global_cases %>%
 entertainment_stocks<-entertainment_stocks %>% 
   mutate(Date = as.Date(Date, format="%m/%d/%y"))
 global_cases<-global_cases %>% 
-  mutate(Date = as.Date(Date, format = "%B %d, %Y"))
+  mutate(Date = as.Date(Date, format = "%B %d, %Y")) %>% 
+  select(Date, Global_Cases = `Total confirmed cases of COVID-19 (cases)`)
 US_cases<-US_cases %>% 
-  mutate(Date = as.Date(Date, format = "%B %d, %Y"))
+  mutate(Date = as.Date(Date, format = "%B %d, %Y")) %>% 
+  select(Date, US_Cases = `Total confirmed cases of COVID-19 (cases)`)
+temp<-left_join(global_cases, US_cases, by = "Date")
+stocks_cases<-left_join(entertainment_stocks, temp, by = "Date")
+
 ```
 
