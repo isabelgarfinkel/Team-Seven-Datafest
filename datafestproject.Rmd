@@ -44,5 +44,9 @@ entertainment_stocks<-Amazon_6M %>%
          Google_Close = Google_Class_A_6M$`Close/Last`,
          Netflix_Close = Netflix_6M$`Close/Last`,
          Roku_Close = Roku_6M$`Close/Last`)
+US_cases<-global_cases %>% 
+  filter(Entity=="United States")
+global_cases<-global_cases %>% 
+  filter(Entity=="World")
 ```
 
