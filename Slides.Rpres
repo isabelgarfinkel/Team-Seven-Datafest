@@ -1,45 +1,38 @@
----
-title: "datafestproject"
-output: html_document
-Authors: "Hayden Lau, Isabel Garfinkel, Tiana Horace, Braden Hammond"
----
+Slides
+========================================================
+author: 
+date: 
+autosize: true
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, comment = NA, 
-                      message = FALSE, warning = FALSE,
-                      fig.height=6, fig.width = 9, fig.align = "center")
-```
+First Slide
+========================================================
+We sought to explore the effects of the coronavirus on the entertainment industry. Specifically,
+we compared companies that had streaming services vs. the companies who were primarily brick and mortar movie theaters.
 
-# Library
+Initially, we planned to look at Apple, AT&T, Amazon, Netflix, Disney, AMC, Cinemark, Google, and Roku. However, Disney, AT&T, Amazon, Apple, and Google all had extremely diversified business portfolios that made the effects of the coronavirus on the streaming industry vs brick and mortar theater industry harder to interpret. As such, it made more sense to narrow the comparisons down to AMC and Cinemark, two of the largest players in the movie theater industry, and Netflix and Roku, one of which is the largest streaming service and the other provides devices streamlined to access streaming services.
 
-```{r}
+Slide With Code
+========================================================
+
+```{r, echo= FALSE}
 library(tidyverse)
-```
 
-
-# Data
-```{r data}
 Amazon_6M <- read_csv("data/Amazon 6M.csv")
 AMC_6M <- read_csv("data/AMC 6M.csv")
 Apple_6M <- read_csv("data/Apple 6M.csv")
 ATT_HBO_6M <- read_csv("data/AT&T (HBO) 6M.csv")
 Cinemark_6M <- read_csv("data/Cinemark 6M.csv")
-Dish_6M <- read_csv("data/Dish 6M.csv")
 Disney_6M <- read_csv("data/Disney 6M.csv")
 Google_Class_A_6M <- read_csv("data/Google Class A 6M.csv")
 Netflix_6M <- read_csv("data/Netflix 6M.csv")
 Roku_6M <- read_csv("data/Roku 6M.csv")
 global_cases <- read_csv("data/total-cases-covid-19.csv")
-```
-
-```{r}
 entertainment_stocks<-Amazon_6M %>% 
   select(Date,Amazon_Close=`Close/Last`) %>% 
   mutate(AMC_Close = AMC_6M$`Close/Last`,
          Apple_Close = Apple_6M$`Close/Last`,
          ATT_Close = ATT_HBO_6M$`Close/Last`,
          Cinemark_Close = Cinemark_6M$`Close/Last`,
-         Dish_Close = Dish_6M$`Close/Last`,
          Disney_Close = Disney_6M$`Close/Last`,
          Google_Close = Google_Class_A_6M$`Close/Last`,
          Netflix_Close = Netflix_6M$`Close/Last`,
@@ -64,42 +57,36 @@ stocks_cases$AMC_Close<-as.numeric(gsub('[$]', '', stocks_cases$AMC_Close))
 stocks_cases$Apple_Close<-as.numeric(gsub('[$]', '', stocks_cases$Apple_Close))
 stocks_cases$ATT_Close<-as.numeric(gsub('[$]', '', stocks_cases$ATT_Close))
 stocks_cases$Cinemark_Close<-as.numeric(gsub('[$]', '', stocks_cases$Cinemark_Close))
-stocks_cases$Dish_Close<-as.numeric(gsub('[$]', '', stocks_cases$Dish_Close))
 stocks_cases$Disney_Close<-as.numeric(gsub('[$]', '', stocks_cases$Disney_Close))
 stocks_cases$Google_Close<-as.numeric(gsub('[$]', '', stocks_cases$Google_Close))
 stocks_cases$Netflix_Close<-as.numeric(gsub('[$]', '', stocks_cases$Netflix_Close))
 stocks_cases$Roku_Close<-as.numeric(gsub('[$]', '', stocks_cases$Roku_Close))
 ```
 
-# Visualizations
-
-```{r}
-# stocks_cases %>% 
-#   filter(!is.na(Apple_Close)) %>% 
-#   ggplot(aes(x=Date))+
-#   geom_point(aes(y=Apple_Close),color="red")+
-#   geom_point(aes(y=ATT_Close), color="blue")
+Slide With Plot
+========================================================
+```{r, echo = FALSE}
 par(mar=c(5, 4, 4, 6) + 0.1, pch = 16)
-plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
-mtext("Global Cases",side=2,line=2.5)
-par(new=TRUE)
-plot(x = stocks_cases$Date, y = stocks_cases$Apple_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="",main="Apple Close Data vs Global Cases")
-mtext("Apple Close Price",side=4,col="red",line=4) 
-axis(4, col="red",col.axis="red")
-
-plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
-mtext("Global Cases",side=2,line=2.5)
-par(new=TRUE)
-plot(x = stocks_cases$Date, y = stocks_cases$ATT_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="", main = "AT&T Close Data vs Global Cases")
-mtext("AT&T Close Price",side=4,col="red",line=4) 
-axis(4, col="red",col.axis="red")
-
-plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
-mtext("Global Cases",side=2,line=2.5)
-par(new=TRUE)
-plot(x = stocks_cases$Date, y = stocks_cases$Amazon_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="",main = "Amazon Close Data vs Global Cases")
-mtext("Amazon Close Price",side=4,col="red",line=4) 
-axis(4, col="red",col.axis="red")
+# plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
+# mtext("Global Cases",side=2,line=2.5)
+# par(new=TRUE)
+# plot(x = stocks_cases$Date, y = stocks_cases$Apple_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="",main="Apple Close Data vs Global Cases")
+# mtext("Apple Close Price",side=4,col="red",line=4) 
+# axis(4, col="red",col.axis="red")
+# 
+# plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
+# mtext("Global Cases",side=2,line=2.5)
+# par(new=TRUE)
+# plot(x = stocks_cases$Date, y = stocks_cases$ATT_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="", main = "AT&T Close Data vs Global Cases")
+# mtext("AT&T Close Price",side=4,col="red",line=4) 
+# axis(4, col="red",col.axis="red")
+# 
+# plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
+# mtext("Global Cases",side=2,line=2.5)
+# par(new=TRUE)
+# plot(x = stocks_cases$Date, y = stocks_cases$Amazon_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="",main = "Amazon Close Data vs Global Cases")
+# mtext("Amazon Close Price",side=4,col="red",line=4) 
+# axis(4, col="red",col.axis="red")
 
 plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
 mtext("Global Cases",side=2,line=2.5)
@@ -108,12 +95,12 @@ plot(x = stocks_cases$Date, y = stocks_cases$Netflix_Close, type = "p", col = "r
 mtext("Netflix Close Price",side=4,col="red",line=4) 
 axis(4, col="red",col.axis="red")
 
-plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
-mtext("Global Cases",side=2,line=2.5)
-par(new=TRUE)
-plot(x = stocks_cases$Date, y = stocks_cases$Disney_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="", main = "Disney Close Data vs Global Cases")
-mtext("Disney Close Price",side=4,col="red",line=4) 
-axis(4, col="red",col.axis="red")
+# plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
+# mtext("Global Cases",side=2,line=2.5)
+# par(new=TRUE)
+# plot(x = stocks_cases$Date, y = stocks_cases$Disney_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="", main = "Disney Close Data vs Global Cases")
+# mtext("Disney Close Price",side=4,col="red",line=4) 
+# axis(4, col="red",col.axis="red")
 
 plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
 mtext("Global Cases",side=2,line=2.5)
@@ -129,19 +116,12 @@ plot(x = stocks_cases$Date, y = stocks_cases$Cinemark_Close, type = "p", col = "
 mtext("Cinemark Close Price",side=4,col="red",line=4) 
 axis(4, col="red",col.axis="red")
 
-plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
-mtext("Global Cases",side=2,line=2.5)
-par(new=TRUE)
-plot(x = stocks_cases$Date, y = stocks_cases$Dish_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="", main = "Dish Close Data vs Global Cases")
-mtext("Dish Close Price",side=4,col="red",line=4) 
-axis(4, col="red",col.axis="red")
-
-plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
-mtext("Global Cases",side=2,line=2.5)
-par(new=TRUE)
-plot(x = stocks_cases$Date, y = stocks_cases$Google_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="", main = "Google Close Data vs Global Cases")
-mtext("Google Close Price",side=4,col="red",line=4) 
-axis(4, col="red",col.axis="red")
+# plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
+# mtext("Global Cases",side=2,line=2.5)
+# par(new=TRUE)
+# plot(x = stocks_cases$Date, y = stocks_cases$Google_Close, type = "p", col = "red",axes=FALSE, frame.plot=TRUE, xlab="", ylab="", main = "Google Close Data vs Global Cases")
+# mtext("Google Close Price",side=4,col="red",line=4) 
+# axis(4, col="red",col.axis="red")
 
 plot(x = stocks_cases$Date, y = stocks_cases$Global_Cases, type = "p", col = "black",axes=TRUE, frame.plot=TRUE, xlab="", ylab="")
 mtext("Global Cases",side=2,line=2.5)
@@ -150,4 +130,3 @@ plot(x = stocks_cases$Date, y = stocks_cases$Roku_Close, type = "p", col = "red"
 mtext("Roku Close Price",side=4,col="red",line=4) 
 axis(4, col="red",col.axis="red")
 ```
-
